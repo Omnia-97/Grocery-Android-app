@@ -5,12 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemClickListener {
     RecyclerView recyclerView;
     List<ItemModel> itemList;
     MyAdapter myAdapter;
@@ -39,5 +41,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayout);
         myAdapter = new MyAdapter(itemList);
         recyclerView.setAdapter(myAdapter);
+        myAdapter.setClickListener(this);
+    }
+
+    @Override
+    public void onClick(int position, View v) {
+        Toast.makeText(this, "Clicked on " + itemList.get(position).getItemTitle(), Toast.LENGTH_SHORT).show();
     }
 }
